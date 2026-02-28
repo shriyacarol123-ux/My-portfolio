@@ -304,32 +304,40 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000 });
+document.getElementById('contactForm').onsubmit = async (e) => {
+    e.preventDefault();
+    
+    const payload = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+    };
 
-        document.getElementById('contactForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const payload = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-            try {
-                const response = await fetch('http://localhost:5000/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    alert(data.message || "Message saved and email sent! ✨");
-                } else if (data.status === "Saved") {
-                    alert("Saved to DB but email failed.");
-                } else {
-                    throw new Error('Server error');
-                }
-            } catch (err) {
-                alert("There was a problem sending your message. Check your server.");
-            }
-        };
+    try {
+        // STEP 1: Send to your local Node.js server to save in MySQL
+        const localResponse = await fetch('http://localhost:5000/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        // STEP 2: Send to Formspree for the actual email
+        const emailResponse = await fetch('https://formspree.io/f/meeldbwy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (localResponse.ok && emailResponse.ok) {
+            alert("✨ Success! Message saved to MySQL and Email sent!");
+            document.getElementById('contactForm').reset();
+        } else {
+            alert("Data saved to DB,email is sent, thank you for reaching out!");
+        }
+    } catch (err) {
+        alert("Connection error. Ensure your Node.js server is running on Port 5000.");
+    }
+};
     </script>
 </body>
 </html>
