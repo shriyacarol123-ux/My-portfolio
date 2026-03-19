@@ -87,6 +87,4 @@ app.post('/contact', (req, res) => {
         });
     });
 });
-
->>>>>>> 6651750 (Verified linting and testing-ready for hosting)
 app.listen(5000, () => console.log("Server running on http://localhost:5000"));
