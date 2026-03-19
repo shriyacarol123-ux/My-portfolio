@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -84,7 +83,7 @@ app.post('/contact', (req, res) => {
                 // still return success for db insert but indicate email problem
                 return res.status(500).send({ status: "Saved", message: "Saved to DB but email failed." });
             }
-            res.send({ status: "Success", message: "Message saved and email sent!" });
+            res.send({ status: "Success", message: "Thank you! ✨ Message saved to MYSQL and email sent" });
         });
     });
 });
