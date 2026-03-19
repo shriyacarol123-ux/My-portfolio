@@ -29,7 +29,7 @@ app.post('/contact', (req, res) => {
     });
 });
 
-=======
+
 const express = require('express');
 // load .env file if present to configure email credentials
 require('dotenv').config();
