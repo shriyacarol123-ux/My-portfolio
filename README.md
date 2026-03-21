@@ -31,3 +31,22 @@ Database (The Vault): MySQL. Ensures all health logs are stored permanently with
 
 Analysis (Future Scope): R-Studio. Used for processing the stored SQL data into visual health trends.
 
+
+📧 System Monitoring & Alerts
+NutriTrack includes a built-in Developer Alert System using Node.js and Nodemailer.
+
+Real-Time Monitoring: Every time a new entry is added to the MySQL Health Vault, a summary is instantly routed to the administrator.
+
+Audit Trail: This ensures that the Data Pipeline is functioning correctly and provides a secondary "live log" outside of the database.
+
+Security & Verification: By receiving these alerts, the developer can verify that the REST API is processing inputs accurately before they are committed to long-term storage.
+
+
+🛡️ Quality Assurance & DevOps
+To ensure the reliability of the NutriTrack Data Pipeline, this project incorporates professional software development practices:
+
+Linting: Automated syntax checking to ensure clean, error-free HTML, CSS, and JavaScript.
+
+Automated Testing: Functional tests to verify that meal logging and calorie calculations are 100% accurate before deployment.
+
+CI/CD Pipeline: Integrated via GitHub Actions. Every update is automatically built, tested, and verified. A "Green Build" status ensures the ecosystem is always production-ready.
