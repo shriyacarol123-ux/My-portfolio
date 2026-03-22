@@ -2,7 +2,7 @@
 NutriTrack is a specialized health-data interface built to provide instant feedback on caloric intake. By connecting a responsive frontend to a MySQL persistence layer, it ensures that your daily energy tracking is accurate and stored securely.
 
 🎯 Project Focus: The Calorie Speedometer
-Unlike complex apps that track every micro-detail, NutriTrack focuses on the most critical metric for health management: The Daily Calorie Total. It is designed for users who need a fast, "no-friction" way to log meals and see their updated status immediately.
+Unlike complex apps that track every micro-detail, CaloriTrack focuses on the most critical metric for health management: The Daily Calorie Total. It is designed for users who need a fast, "no-friction" way to log meals and see their updated status immediately.
 
 💡 Core Features (As Implemented)
 Instant State Synchronization: As soon as a meal is logged, the app fetches the new total directly from the database without a page refresh.
