@@ -1,41 +1,26 @@
-🥗 NutriTrack: Building Health With Data
-NutriTrack is a full-stack health-tech application designed for personal nutritional accountability. By bridging the gap between daily eating habits and data science, NutriTrack helps users move from "guessing" their health to "knowing" their data.
+🥗 NutriTrack: Real-Time Calorie Intelligence
+NutriTrack is a specialized health-data interface built to provide instant feedback on caloric intake. By connecting a responsive frontend to a MySQL persistence layer, it ensures that your daily energy tracking is accurate and stored securely.
 
-🎯 Project Overview
-NutriTrack is designed to provide a seamless Data Pipeline for tracking caloric intake across different life stages. Whether for a student managing a busy schedule or a professional tracking long-term wellness, this app provides real-time feedback and persistent storage.
+🎯 Project Focus: The Calorie Speedometer
+Unlike complex apps that track every micro-detail, NutriTrack focuses on the most critical metric for health management: The Daily Calorie Total. It is designed for users who need a fast, "no-friction" way to log meals and see their updated status immediately.
 
-💡 Why NutriTrack?
-Precision: Replaces vague estimations with an objective "Daily Calorie Speedometer."
+💡 Core Features (As Implemented)
+Instant State Synchronization: As soon as a meal is logged, the app fetches the new total directly from the database without a page refresh.
 
-Accountability: Provides immediate feedback to help users stay within their nutritional goals.
+MySQL Upsert Logic: The system uses ON DUPLICATE KEY UPDATE to ensure that each user has a single, clean record for their daily total, preventing data fragmentation.
 
-Data Integrity: Every entry is stored in a structured format, ready for deep statistical analysis.
+Relational Aggregation: The backend performs a SUM(calories) calculation on the fly, ensuring the frontend always displays the most current data.
 
-👥 Target Audience
-NutriTrack is an inclusive tool designed for adults (18+) at various life stages:
+🛠️ The Tech Stack
+Frontend: HTML5, CSS3 (Bootstrap 5), and JavaScript. Utilizes AOS for a modern, fluid user experience.
 
-Students (18-25): Managing energy levels during high-stress exam periods.
+Backend: Node.js & Express. Acts as the controller for processing meal data and managing database queries.
 
-Professionals (26-50): Maintaining metabolic health and weight management.
+Database: MySQL. Handles the storage and mathematical aggregation of user caloric data.
 
-Seniors (50+): Monitoring specific dietary needs and keeping a history for healthcare providers.
+🛡️ Technical Implementation Details
+Data Validation: The system parses input as integers to ensure mathematical accuracy in the database.
 
-🛠️ The Tech Stack (The Ecosystem)
-The project is built using a Three-Tier Architecture:
+API Architecture: Built with a RESTful POST endpoint that returns a JSON payload containing the updated user state.
 
-Frontend (The Logger): HTML5, CSS3, and JavaScript (AOS for animations). Provides the user interface for real-time logging.
-
-Backend (The Brain): Node.js & Express. Handles API routing and processes incoming meal data.
-
-Database (The Vault): MySQL. Ensures all health logs are stored permanently with accurate timestamps.
-
-Analysis (Future Scope): R-Studio. Used for processing the stored SQL data into visual health trends.
-
-🛡️ Quality Assurance & DevOps
-To ensure the reliability of the NutriTrack Data Pipeline, this project incorporates professional software development practices:
-
-Linting: Automated syntax checking to ensure clean, error-free HTML, CSS, and JavaScript.
-
-Automated Testing: Functional tests to verify that meal logging and calorie calculations are 100% accurate before deployment.
-
-CI/CD Pipeline: Integrated via GitHub Actions. Every update is automatically built, tested, and verified. A "Green Build" status ensures the ecosystem is always production-ready.
+Error Handling: Includes a comprehensive try-catch block and database connection monitoring to ensure system uptime.
