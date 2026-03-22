@@ -28,22 +28,25 @@ db.connect(err => {
 app.post('/log-meal', (req, res) => {
     const { name, meal, calories } = req.body;
 
-    // This is the EXACT place where the "Addition" logic lives
+    // Use CONCAT to keep the old food names and add the new one
     const sql = `
         INSERT INTO meals (user_name, food_name, calories) 
         VALUES (?, ?, ?) 
         ON DUPLICATE KEY UPDATE 
         calories = calories + VALUES(calories),
-        food_name = VALUES(food_name)`;
+        food_name = CONCAT(food_name, ', ', VALUES(food_name))`;
 
     db.query(sql, [name, meal, calories], (err, result) => {
         if (err) {
-            console.error("Database Error:", err);
-            return res.status(500).json({ error: "Database Sync Failed" });
+            console.error(err);
+            return res.status(500).json({ error: "DB Error" });
         }
-        
-        console.log(`Data processed for: ${name}`);
-        res.status(200).json({ message: "Success! Calories merged in MySQL." });
+
+        const totalSql = "SELECT SUM(calories) AS total FROM meals WHERE user_name = ?";
+        db.query(totalSql, [name], (err, rows) => {
+            if (err) return res.status(500).json({ error: "Fetch Error" });
+            res.status(200).json({ message: "Success", total: rows[0].total });
+        });
     });
 });
 // 3. Start Server on Port 5000
